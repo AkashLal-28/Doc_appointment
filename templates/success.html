@@ -105,15 +105,20 @@
                 <div class="row g-3">
                         <h4>Appointment Details</h4><br>
                         <p><b>Patient Name:</b> {{yourname}}</p>
-                        <p>Email: {{youremail}}</p>
-                        <p>Mobile: {{yourmobile}}</p>
-                        <p>Doctor: {{yourdoctor}}</p>
-                        <p>Date: {{yourdate}}</p>
-                        <p>Time: {{yourtime}}</p>
-                        <p>Reason: {{problem}}</p>
+                        <p><b>Email:</b>  {{youremail}}</p>
+                        <p><b>Mobile:</b>  {{yourmobile}}</p>
+                        <p><b>Doctor:</b>  {{yourdoctor}}</p>
+                        <p><b>Date:</b>  {{yourdate}}</p>
+                        <p><b>Time:</b>  {{yourtime}}</p>
+                        <p><b>Reason:</b>  {{problem}}</p>
                 </div>
+                
             </div>
-            <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
+            
+            <div class="team-text bg-light text-center p-4">
+                <h5>Email confirmation has been sent to your email.</h5>
+                <p class="text-primary"><a href="{% url 'home' %}" class="nav-item nav-link active">Home</a></p>
+            </div>
         </div>
         </center>  
     <!-- Page Header End --> 
