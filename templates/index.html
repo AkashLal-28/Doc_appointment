@@ -36,9 +36,9 @@
 <body>
     {% if messages %}
         {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert" id="cls">
             <strong>Message:</strong>{{ message }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" id="closed" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         {% endfor %}
@@ -548,11 +548,14 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Newsletter</h5>
-                    <p>SignUp to newsletter for latest updates.</p>
-                    <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                    </div>
+                    <form action="{% url 'newsletter' %}" method="POST">
+                        {% csrf_token %}
+                        <p>SignUp to newsletter for latest updates.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email" name="newemail">
+                            <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -578,6 +581,16 @@
 
     <!-- Template Javascript -->
     <script src="{% static 'js/main.js' %}"></script>
+
+    <!-- close button activation -->
+
+    <script>
+        let closebtn = document.getElementById('cls')
+
+        closebtn.addEventListener("click", function () {
+            closebtn.style.display = "none";
+        });
+    </script>
 </body>
 
 </html>

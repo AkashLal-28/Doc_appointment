@@ -15,6 +15,7 @@ urlpatterns = [
     path('feature/', views.feature, name = 'feature'),
     path('team/', views.team, name = 'team'),
     path('testimonial/', views.testimonial, name = 'testimonial'),
-    path('contact/', views.contact, name = 'contact')
+    path('contact/', views.contact, name = 'contact'),
+    path('newsletter/', views.newsletter, name = 'newsletter'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

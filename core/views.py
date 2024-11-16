@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from core.models import PatientAppoint, PatientQuery
+from core.models import PatientAppoint, PatientQuery, Newsletter
 from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.conf import settings
@@ -81,5 +81,15 @@ def query(request):
     else:
         return render(request, 'contact.html')   
 
+def newsletter(request):
+    if request.method == "POST":
+        newemail = request.POST.get('newemail')
+
+        new_email = Newsletter(newemail=newemail)
+        new_email.save()
+        messages.success(request, 'email registered!')
+        return redirect('home')
+    else:
+        return render(request, 'index.html')
 
     
