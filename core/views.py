@@ -19,21 +19,17 @@ def about(request):
 def signup(request):
     if request.method == "POST":
         username = request.POST['username']
-        fname = request.POST['firstname']
-        lname = request.POST['lastname']
         email = request.POST['email']
         password = request.POST['password1']
         password2 = request.POST['password2']   
 
         myuser = User.objects.create_user(username, email, password)
-        myuser.first_name = fname
-        myuser.last_name = lname
 
         myuser.save()
-        messages.success(request, 'successful!')
-        return redirect('signin')
+        messages.success(request, ' sign up successful!, signin now!!')
+        return redirect('home')
 
-    return render(request, 'authentication/signup.html')
+    return render(request, 'index.html')
 
 
 def signin(request):
@@ -45,14 +41,20 @@ def signin(request):
 
         if user is not None:
             login(request, user)
-            messages.success(request, 'hello!')
+            messages.success(request, f' hello! {username}')
             return redirect('home')
 
         else:
             messages.error(request, 'Not applicable!')
             return redirect('home')
 
-    return render(request, 'authentication/signin.html')
+    return render(request, 'index.html')
+
+
+def signout(request):
+    logout(request)
+    messages.success(request, ' successfully signed out!')
+    return redirect('home')
 
 
 def book_appointment(request):
@@ -81,7 +83,7 @@ def book_appointment(request):
 
         template = render_to_string(
             'email.html',
-            {'username':yourname, 'doc':yourdoctor, 'date':yourdate, 'time':yourtime,}
+            {'username':yourname, 'doc':yourdoctor, 'date':yourdate, 'time':yourtime, 'problem':problem}
         )
 
         email = EmailMessage(

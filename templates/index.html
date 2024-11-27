@@ -109,13 +109,18 @@
 
                 <!-- signin signup start -->
                 
+                {% if user.is_authenticated %}
 
+                <button id="sbtn" style="width:auto;"><a href="{% url "signout" %}" style="color: white;" >Sign out</a></button>
 
-                <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign in</button>
+                {% else %}
+                {% block content %}
+
+                <button id="sbtn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign in</button>
 
                 <div id="id01" class="modal">
                     <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close">&times;</span>
-                    <form action="/signin" method="post">
+                    <form action="{% url 'signin' %}" method="post">
                         {% csrf_token %}
                         <div class="container">
                         <h1>Sign in</h1>
@@ -127,16 +132,16 @@
                         <input type="password" placeholder="Enter Password" id="password1" name="password1" required>
 
                         <div class="clearfix">
-                            <button type="submit" class="signinbtn">Sign in</button>
+                            <button id="sbtn" type="submit" class="signinbtn">Sign in</button>
                         </div>
-                            <span class="psw">New User? <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</button> </span>
+                            <span class="psw">New User? <button id="sbtn" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</button> </span>
                         </div>
                     </form>
                 </div>
 
                 <div id="id02" class="modal">
                     <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close">&times;</span>
-                    <form action="/signin" method="post">
+                    <form action="{% url 'signup' %}" method="post">
                         {% csrf_token %}
                         <h1>Sign Up</h1>
                         <p style="color: rgb(46, 32, 32);">Please fill in this form to create an account.</p>
@@ -153,18 +158,15 @@
                         <label for="psw-repeat"><b style="color: rgb(46, 32, 32);">Confirm Password</b></label>
                         <input type="password" placeholder="Confirm Password" id="password2" name="password2" required>
                         
-                        
-                  
-                        
-                  
                         <div class="clearfix">
-                          <button type="submit" class="signupbtn">Sign Up</button>
-                          <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+                          <button id="sbtn" type="submit" class="signupbtn">Sign Up</button>
+                          <button id="sbtn" type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
                         </div>
                       </div>
-                    </form>
-                
-            </div>
+                    </form>    
+                </div>
+                {% endblock content %}
+                {% endif %}
             
             <a href="{% url 'appointment' %}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Appointment<i class="fa fa-arrow-right ms-3"></i></a>
 
@@ -252,7 +254,7 @@
     </div>
     <!-- About End -->
 
-    {% block content %}
+  
     <!-- Service Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -325,7 +327,7 @@
         </div>
     </div>
     <!-- Service End -->
-    {% endblock content %}
+  
 
 
     <!-- Feature Start -->
