@@ -30,9 +30,30 @@ phone.addEventListener("change", function (e) {
   }
 });
 
+// signup/password validation in signup
+
+let pass1 = documemt.getElementById('password_1')
+let pass2 = documemt.getElementById('password_2')
+let signupbtn = document.getElementsByClassName('signupbtn')
+let usernm = document.querySelectorAll('#username')
+
+usernm.addEventListener('change', function(){
+    let enteruser = usernm.value
+    if(enteruser.length<2){
+      alert('test')
+    }
+}) 
+
+pass1.addEventListener("change", function(){
+  let userpass1 = pass1.value
+  if(userpass1.length > 3){
+    alert('test')
+  }
+})
+
 //close button
 
-let closebtn = document.getElementById("cls");
+let closebtn = document.getElementById("closed");
 
 closebtn.addEventListener("click", function () {
   closebtn.style.display = "none";
@@ -50,3 +71,7 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
+
+

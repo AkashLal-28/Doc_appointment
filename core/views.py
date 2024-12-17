@@ -21,7 +21,15 @@ def signup(request):
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password1']
-        password2 = request.POST['password2']   
+        password2 = request.POST['password2']  
+
+        if len(username) < 3:
+            messages.error(request, ' error username')
+            username = ""
+        elif password != password2 or len(password)<4:
+            messages.error(request, ' password issue')
+            password=""
+            password2=""
 
         myuser = User.objects.create_user(username, email, password)
 
